@@ -1,0 +1,78 @@
+diff --git a/sites/default/default.settings.php b/sites/default/default.settings.php
+index 1c8dbee9e7..bdf655414e 100644
+--- a/sites/default/default.settings.php
++++ b/sites/default/default.settings.php
+@@ -751,7 +751,8 @@
+  *
+  * Keep this code block at the end of this file to take full effect.
+  */
+-#
+-# if (file_exists($app_root . '/' . $site_path . '/settings.local.php')) {
+-#   include $app_root . '/' . $site_path . '/settings.local.php';
+-# }
++
++if (file_exists($app_root . '/' . $site_path . '/settings.local.php')) {
++  include $app_root . '/' . $site_path . '/settings.local.php';
++}
++
+diff --git a/sites/development.services.yml b/sites/development.services.yml
+index d2857c66f8..0553016c17 100644
+--- a/sites/development.services.yml
++++ b/sites/development.services.yml
+@@ -4,6 +4,10 @@
+ # 'example.settings.local.php' file, which sits next to this file.
+ parameters:
+   http.response.debug_cacheability_headers: true
++  twig.config:
++    debug: true
++    auto_reload: true
++    cache: false
+ services:
+   cache.backend.null:
+     class: Drupal\Core\Cache\NullBackendFactory
+diff --git a/sites/example.settings.local.php b/sites/example.settings.local.php
+index 520cb4acd5..01235eb40b 100644
+--- a/sites/example.settings.local.php
++++ b/sites/example.settings.local.php
+@@ -66,7 +66,7 @@
+  *
+  * Only use this setting once the site has been installed.
+  */
+-# $settings['cache']['bins']['render'] = 'cache.backend.null';
++$settings['cache']['bins']['render'] = 'cache.backend.null';
+ 
+ /**
+  * Disable caching for migrations.
+@@ -74,7 +74,7 @@
+  * Uncomment the code below to only store migrations in memory and not in the
+  * database. This makes it easier to develop custom migrations.
+  */
+-# $settings['cache']['bins']['discovery_migration'] = 'cache.backend.memory';
++$settings['cache']['bins']['discovery_migration'] = 'cache.backend.memory';
+ 
+ /**
+  * Disable Internal Page Cache.
+@@ -88,7 +88,7 @@
+  *
+  * Only use this setting once the site has been installed.
+  */
+-# $settings['cache']['bins']['page'] = 'cache.backend.null';
++$settings['cache']['bins']['page'] = 'cache.backend.null';
+ 
+ /**
+  * Disable Dynamic Page Cache.
+@@ -97,7 +97,7 @@
+  * cacheability metadata is present (and hence the expected behavior). However,
+  * in the early stages of development, you may want to disable it.
+  */
+-# $settings['cache']['bins']['dynamic_page_cache'] = 'cache.backend.null';
++$settings['cache']['bins']['dynamic_page_cache'] = 'cache.backend.null';
+ 
+ /**
+  * Allow test modules and themes to be installed.
+@@ -152,4 +152,4 @@
+  * to use this feature with modules that affect Drupal in a major way such as
+  * the language or field module.
+  */
+-# $settings['config_exclude_modules'] = ['devel', 'stage_file_proxy'];
++$settings['config_exclude_modules'] = ['devel', 'stage_file_proxy'];

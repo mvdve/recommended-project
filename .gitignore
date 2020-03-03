@@ -1,0 +1,24 @@
+# Development environment.
+node_modules
+.bash_history
+.composer
+.pki
+.idea
+.DS_Store
+.bashrc
+.viminfo
+.drush
+
+# Composer dependencies
+public/vendor
+public/web/core
+public/web/modules/contrib
+public/web/themes/contrib
+
+# Ignore configuration files that may contain sensitive information.
+public/web/sites/*/settings.local.php
+public/web/sites/*/settings.php
+
+# Ignore paths that contain user-generated content.
+public/web/sites/*/files
+public/web/sites/*/private
